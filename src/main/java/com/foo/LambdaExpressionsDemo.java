@@ -22,7 +22,7 @@ public class LambdaExpressionsDemo {
     private int operate(int a, int b, MathOperation mathOperation){
         return mathOperation.operation(a, b);
     }
-
+    //Predicate <T> interface is a functional interface with a method test(Object) to return a Boolean value.
     public static void evaluate(List<Integer> list, Predicate<Integer> predicate) {
         for(Integer n: list)  {
             if(predicate.test(n)) {
