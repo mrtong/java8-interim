@@ -32,7 +32,7 @@ public class LambdaExpressionsDemo {
     }
 
     public static void main(String args[]){
-        LambdaExpressionsDemo tester = new LambdaExpressionsDemo();
+        LambdaExpressionsDemo lambdaExpressionsDemo = new LambdaExpressionsDemo();
 
         //with type declaration
 //        MathOperation addition = (int a, int b) -> a + b;
@@ -46,10 +46,11 @@ public class LambdaExpressionsDemo {
         //without return statement and without curly braces
         MathOperation division = (int a, int b) -> a / b;
 
-        System.out.println("10 + 5 = " + tester.operate(10, 5, (int a, int b) -> a + b));
-        System.out.println("10 - 5 = " + tester.operate(10, 5, subtraction));
-        System.out.println("10 x 5 = " + tester.operate(10, 5, multiplication));
-        System.out.println("10 / 5 = " + tester.operate(10, 5, division));
+        System.out.println("10 + 5 = " + lambdaExpressionsDemo.operate(10, 5, (int a, int b) -> a + b));
+        System.out.println("10 - 5 = " + lambdaExpressionsDemo.operate(10, 5, subtraction));
+        System.out.println("10 x 5 = " + lambdaExpressionsDemo.operate(10, 5, multiplication));
+        System.out.println("15 x 5 = " + multiplication.operation(15, 5));
+        System.out.println("10 / 5 = " + lambdaExpressionsDemo.operate(10, 5, division));
 
         //with parenthesis
         GreetingService greetService1 = message ->

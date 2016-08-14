@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 public class ConsumerDemo {
     public static void main(String ... args){
         String x = "Hello World";
-        Consumer<String> consumer = (y) ->{
+        Consumer<String> consumer = y ->{
             System.out.println("x = " + x); // Statement A
             System.out.println("y = " + y);
 
