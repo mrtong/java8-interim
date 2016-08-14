@@ -11,10 +11,16 @@ import java.util.function.Consumer;
  */
 public class ConsumerDemo {
     public static void main(String ... args){
-        int x = 99;
-        Consumer<Integer> consumer = (y) ->{
+        String x = "Hello World";
+        Consumer<String> consumer = (y) ->{
             System.out.println("x = " + x); // Statement A
             System.out.println("y = " + y);
+
+            if(x.equals(y)){
+
+                System.out.println("I am NOT surprised x.equals(y)"); // Statement A
+            }
+
             if (x==y){
                 System.out.println("I am surprised x==y"); // Statement A
             }
