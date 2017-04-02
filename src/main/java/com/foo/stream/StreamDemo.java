@@ -1,4 +1,4 @@
-package com.foo;
+package com.foo.stream;
 
 import com.foo.pojo.McDonald;
 
