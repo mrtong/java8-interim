@@ -6,8 +6,10 @@ import java.util.function.Predicate;
 import static java.util.Arrays.asList;
 
 /**
- In short, it is not easy to pass plain methods / functionalities in Java that can be passed as arguments. Due to this limitation Java 8 adds a brand new language level feature called Lambda Expressions.
- A lambda expression is an anonymous function (not 100% true for Java but lets assume it for time being). Simply put, it’s a method without a declaration, i.e., access modifier, return value declaration, and name.
+ In short, it is not easy to pass plain methods / functionalities in Java that can be passed as arguments.
+ Due to this limitation Java 8 adds a brand new language level feature called Lambda Expressions.
+ A lambda expression is an anonymous function (not 100% true for Java but lets assume it for time being).
+ Simply put, it’s a method without a declaration, i.e., access modifier, return value declaration, and name.
  */
 public class LambdaExpressionsDemo {
 

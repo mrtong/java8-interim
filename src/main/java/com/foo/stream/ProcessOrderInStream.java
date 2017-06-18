@@ -10,7 +10,7 @@ public class ProcessOrderInStream {
         Stream.of("d2", "a2", "b1", "b3", "c")
                 .filter(s->{
                     System.out.println("filter: " + s);
-                    return true;
+                    return false;
                 })
                 .forEach(s->System.out.println("for each: " + s));
     }
