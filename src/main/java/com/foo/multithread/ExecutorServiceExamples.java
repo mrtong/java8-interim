@@ -56,5 +56,6 @@ public class ExecutorServiceExamples {
 
         System.out.println("futureFromCallable.get() = "
                 + futureFromCallable.get());
+        executorService1.shutdown();
     }
 }
