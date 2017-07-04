@@ -3,11 +3,8 @@ package com.foo;
 import java.util.function.Consumer;
 
 /**
- * Created with IntelliJ IDEA.
- * User: p744228d
- * Date: 1/03/16
- * Time: 1:43 PM
- * To change this template use File | Settings | File Templates.
+ * Consumer is a kind of functional interface. Thus it can be used in Optional.ifPresent();
+ * And you can use Lambada expression in it.
  */
 public class ConsumerDemo {
     public static void main(String ... args){
