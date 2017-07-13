@@ -112,8 +112,19 @@ public class OptionalUnitTest {
     }
 
     @Test
-    public void priceShouldBeInRange(){
+    public void shouldReturnTrueWhenPriceInRange(){
         Modem modem = new Modem(new Double(13));
         assertTrue(isPriceInRange(modem));
+    }
+
+    @Test
+    public void shouldReturnFalseIfNullIsFeeded(){
+        assertFalse(isPriceInRange(null));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenPriceNotInRange(){
+        Modem modem = new Modem(new Double(18));
+        assertFalse(isPriceInRange(modem));
     }
 }
