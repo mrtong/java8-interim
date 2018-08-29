@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 /**
  * Created by yanjuntong on 2/04/17.
+ * https://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
  */
 public class TheOrderOfFilterMatters {
     public TheOrderOfFilterMatters(){
