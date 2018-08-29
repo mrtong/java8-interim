@@ -10,13 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created with IntelliJ IDEA.
- * User: p744228d
- * Date: 11/02/16
- * Time: 3:08 PM
- * To change this template use File | Settings | File Templates.
- */
 public class StreamDemo {
     public static void main(String... args) throws Exception {
 

@@ -9,7 +9,7 @@ public class LambdaExpressionMustBeFinalDemo {
         Runnable r1 = ()-> System.out.println(name);
 
         String name1 = "";
-        //line 14k will cause aline 15 a compile issue
+        //line 14 will cause aline 15 a compile issue
         //the issue is "Variable used in Lambda expression must be final"
 //        name1 = name.toUpperCase();
 //        Runnable r2 = ()-> System.out.println(name1);
