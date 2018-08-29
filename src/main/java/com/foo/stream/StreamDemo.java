@@ -4,9 +4,7 @@ import com.foo.pojo.McDonald;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -49,10 +47,11 @@ public class StreamDemo {
 
         // The city has the most MacDonald
         Set set = mcDonaldList.stream().collect(Collectors.groupingBy(McDonald::city, Collectors.counting())).entrySet();
-
+        //there are TWO approaches to get the city name of the most MacDonald, line51 and line52
+        String mostMacDonald = ((Map.Entry<String, Long>)Collections.max(set, Map.Entry.comparingByValue())).getKey();
         Map.Entry<String, Long> entry = (Map.Entry<String, Long>)set.stream().max(Map.Entry.comparingByValue()).get();
 
-        System.out.println("The city has the most MacDonald : " + entry) ;
+        System.out.println("The city has the most MacDonald : " + entry.getKey()) ;
 
     }
 }
