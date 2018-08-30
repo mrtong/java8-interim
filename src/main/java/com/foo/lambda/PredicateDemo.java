@@ -8,7 +8,8 @@ import java.util.stream.Stream;
 //Predicate <T> interface is a functional interface with a method test(Object) to return a Boolean value.
 public class PredicateDemo {
     public static void main(String... args) {
-        Predicate<Integer> lessThan = i -> i < 18;
+        int l=18;
+        Predicate<Integer> lessThan = i -> i < l;
         if (lessThan.test(10)) {
             System.out.println("10 is less than 18");
         } else {
