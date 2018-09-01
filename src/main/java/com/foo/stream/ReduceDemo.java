@@ -5,7 +5,6 @@ import com.foo.pojo.Person;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ForkJoinPool;
 
 /**
  The reduction operation combines all elements of the stream into a single result.
