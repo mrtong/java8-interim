@@ -4,7 +4,10 @@ import com.foo.pojo.Person;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  The reduction operation combines all elements of the stream into a single result.
@@ -44,5 +47,16 @@ public class ReduceDemo {
         // Displaying the longest String
         longestString.ifPresent(System.out::println);
 
+        addTwoMaps();
+
+    }
+    private static void addTwoMaps(){
+        List<Integer> list = Arrays.asList(1,2,3,4,5);
+        Supplier<Map<Integer,Integer>> mapSupplier = () -> list.stream().collect(Collectors.toMap(x->x, y-> y * y));
+
+        Map<Integer, Integer> mapValueAdd = list.stream().collect(Collectors.toMap(x->x, y->y, (v1,v2) -> v1+v2, mapSupplier));
+        Map<Integer, Integer> mapValueAdd1 = list.stream().collect(Collectors.toMap(x->x, y->y));
+        System.out.println(mapValueAdd);
+        System.out.println(mapValueAdd1);
     }
 }

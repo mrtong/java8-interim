@@ -1,11 +1,7 @@
 package com.foo;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 /**
  * Created by yanjuntong on 7/07/17.
@@ -32,7 +28,7 @@ public class MapsNewFeatures {
 
         System.out.println("The value of key23 before computeIfAbsent is " + map.get(23) + " since it is absent.");             // null
         map.computeIfAbsent(23, num -> "val" + num);
-        System.out.println("After computeIfAbsent map.containsKey(23) is " +map.containsKey(23));    // true
+        System.out.println("After computeIfAbsent map.containsKey(23) is " + map.containsKey(23));    // true
         System.out.println("The value of key23 after computeIfAbsent is " + map.get(23));             // val23
 
         System.out.println("The value of key3 before computeIfAbsent is " + map.get(3));             // val33
@@ -58,17 +54,6 @@ public class MapsNewFeatures {
         System.out.println(map.get(9));             // val9concat
 
         System.out.println("==============================");
-        addTwoMaps();
-    }
-
-    private static void addTwoMaps(){
-        List<Integer> list = Arrays.asList(1,2,3,4,5);
-        Supplier<Map<Integer,Integer>> mapSupplier = () -> list.stream().collect(Collectors.toMap(x->x, y-> y * y));
-
-        Map<Integer, Integer> mapValueAdd = list.stream().collect(Collectors.toMap(x->x, y->y, (v1,v2) -> v1+v2, mapSupplier));
-        Map<Integer, Integer> mapValueAdd1 = list.stream().collect(Collectors.toMap(x->x, y->y));
-        System.out.println(mapValueAdd);
-        System.out.println(mapValueAdd1);
     }
 
 }
