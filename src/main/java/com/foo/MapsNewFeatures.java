@@ -1,7 +1,12 @@
 package com.foo;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
 /**
  * Created by yanjuntong on 7/07/17.
  */
@@ -51,6 +56,19 @@ public class MapsNewFeatures {
         //this time the second parameter is  non-null value to merge with existing value
         map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
         System.out.println(map.get(9));             // val9concat
+
+        System.out.println("==============================");
+        addTwoMaps();
+    }
+
+    private static void addTwoMaps(){
+        List<Integer> list = Arrays.asList(1,2,3,4,5);
+        Supplier<Map<Integer,Integer>> mapSupplier = () -> list.stream().collect(Collectors.toMap(x->x, y-> y * y));
+
+        Map<Integer, Integer> mapValueAdd = list.stream().collect(Collectors.toMap(x->x, y->y, (v1,v2) -> v1+v2, mapSupplier));
+        Map<Integer, Integer> mapValueAdd1 = list.stream().collect(Collectors.toMap(x->x, y->y));
+        System.out.println(mapValueAdd);
+        System.out.println(mapValueAdd1);
     }
 
 }

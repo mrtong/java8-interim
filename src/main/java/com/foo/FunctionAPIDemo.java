@@ -8,6 +8,7 @@ import java.util.function.LongToDoubleFunction;
 //Java 8 provides function API . These API are functional interface.
 // We can assign it as lambda expression. Function accepts arguments, perform some processing and finally produces result.
 // We need to define data type of arguments and result. Java 8 provides different in-built functions for different data type.
+//Function<T,R>: 数据转换器，接收一个 T 类型的对象，返回一个 R类型的对象； 单参数单返回值的行为接口；提供了 apply, compose, andThen, identity 方法；
 public class FunctionAPIDemo {
     private static void functionSample(){
         Function<Integer,String> ob = f1 -> "Age:"+f1;
