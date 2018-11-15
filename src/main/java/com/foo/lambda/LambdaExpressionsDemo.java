@@ -1,4 +1,4 @@
-package com.foo;
+package com.foo.lambda;
 
 import java.util.List;
 import java.util.function.Predicate;

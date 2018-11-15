@@ -3,19 +3,19 @@ package com.foo;
 /**
  * Created by yanjuntong on 5/07/17.
  */
-public class TrickyLambdaExpressionDemo {
+public class LambdaExpressionMustBeFinalDemo {
     public static void main(String ...args){
         String name = "Hello World";
         Runnable r1 = ()-> System.out.println(name);
 
-        //the below block will cause a compile issue
+        String name1 = "";
+        //line 14 will cause aline 15 a compile issue
         //the issue is "Variable used in Lambda expression must be final"
-//        String name1 = "";
 //        name1 = name.toUpperCase();
 //        Runnable r2 = ()-> System.out.println(name1);
-        String name1 = name.toUpperCase();
-        Runnable r2 = ()-> System.out.println(name1);
+        String name2 = name.toUpperCase();
+        Runnable r3 = ()-> System.out.println(name2);
 
-        r1.run();
+        r3.run();
     }
 }

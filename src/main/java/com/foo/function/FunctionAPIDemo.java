@@ -1,4 +1,4 @@
-package com.foo;
+package com.foo.function;
 
 import java.util.function.DoubleFunction;
 import java.util.function.DoubleToIntFunction;
