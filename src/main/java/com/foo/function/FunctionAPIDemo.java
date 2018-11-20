@@ -1,9 +1,6 @@
 package com.foo.function;
 
-import java.util.function.DoubleFunction;
-import java.util.function.DoubleToIntFunction;
-import java.util.function.Function;
-import java.util.function.LongToDoubleFunction;
+import java.util.function.*;
 
 //Java 8 provides function API . These API are functional interface.
 // We can assign it as lambda expression. Function accepts arguments, perform some processing and finally produces result.
@@ -30,6 +27,12 @@ public class FunctionAPIDemo {
         System.out.println(ob.applyAsDouble(43));
     }
 
+    private static void biFunctionExample(){
+        BiFunction<Integer, Integer, Integer> function1 = (x, y)->x+y;
+        Function<Integer, Integer> function2 = (n) -> n*n;
+        System.out.println(function1.andThen(function2).apply(5, 3));
+    }
+
     public static void main(String ... args){
         System.out.println("This is Function Sample");
         functionSample();
@@ -42,5 +45,8 @@ public class FunctionAPIDemo {
 
         System.out.println("This is longToDoubleFunctionExample");
         longToDoubleFunctionExample();
+
+        System.out.println("This is biFunctionExample");
+        biFunctionExample();
     }
 }
