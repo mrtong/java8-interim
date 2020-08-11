@@ -3,7 +3,8 @@ package com.foo.stream;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+//https://www.baeldung.com/java-9-stream-api
+//takeWhile + dropWhile
 public class TakeWhileDemo {
     public TakeWhileDemo() {
         Stream<String> stream
