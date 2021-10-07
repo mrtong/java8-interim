@@ -23,7 +23,7 @@ public class Primitive2Swapper {
 
     private static void doTask1(int[] numbers) {
         List<Integer> list = Arrays.stream(numbers).boxed().collect(Collectors.toList());
-        System.out.println("Arrays.stream(...).boxed(...) approach.");
+        System.out.println("Arrays.stream(...).boxed(...) approach. \n This is the common approach.");
         System.out.println(list);
     }
 

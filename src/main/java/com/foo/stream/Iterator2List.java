@@ -17,33 +17,33 @@ public class Iterator2List {
 
         System.out.println("---------iteratorToList2--------------");
         iterator = IntStream.range(1, 4).iterator();
-        list=iteratorToList2(iterator);
+        list = iteratorToList2(iterator);
         System.out.println(list);
 
         System.out.println("-----------iteratorToList3------------");
-        iterator = IntStream.of(1,3,2).iterator();
-        list=iteratorToList3(iterator);
+        iterator = IntStream.of(1, 3, 2).iterator();
+        list = iteratorToList3(iterator);
         System.out.println(list);
 
         System.out.println("---------iteratorToList4--------------");
-        list=iteratorToList4();
+        list = iteratorToList4();
         System.out.println(list);
 
 
     }
 
-    private static<T> List<T> iteratorToList(Iterator<T> iterator) {
+    private static <T> List<T> iteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();
         iterator.forEachRemaining(list::add);
         return list;
     }
 
-    private static<T> List<T> iteratorToList2(Iterator<T> iterator) {
-        Iterable<T> iterable = ()->iterator;
+    private static <T> List<T> iteratorToList2(Iterator<T> iterator) {
+        Iterable<T> iterable = () -> iterator;
         return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
     }
 
-    private static<T> List<T> iteratorToList3(Iterator<T> iterator) {
+    private static <T> List<T> iteratorToList3(Iterator<T> iterator) {
         //Like Iterator and ListIterator, Spliterator is a Java Iterator,
         // which is used to iterate elements one-by-one from a List implemented object.
         Spliterator<T> spliterator = Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED);
