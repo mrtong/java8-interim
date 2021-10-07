@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
-public class Iterator2List {
+public class Iterator2ListSample {
     public static void main(String[] args) {
         Iterator<Integer> iterator = IntStream.range(1, 4).iterator();
         List<Integer> list = iteratorToList(iterator);
