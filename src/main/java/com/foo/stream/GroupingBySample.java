@@ -44,6 +44,7 @@ public class GroupingBySample {
         //{19.99=[banana], 29.99=[orang, watermelon], 9.99=[papaya, apple]}
         System.out.println(result);
 
+        //same functionality
         HashMap<BigDecimal, Set<String>> collect = items.stream().collect(
                 Collectors.groupingBy(Item::getPrice,
                         HashMap::new, Collectors.mapping(Item::getName, Collectors.toSet()))
