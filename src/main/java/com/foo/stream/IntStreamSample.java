@@ -22,7 +22,8 @@ public class IntStreamSample {
         intStream = IntStream.of(1, 2, 3);
         System.out.println("Convert int stream to an array. The result is " + intStreamToArray(intStream));
 
-        sumStringStream();
+        sum_A_StringStream_By_reduce();
+        sum_A_StringStream_By_mapToInt();
         convertFromStringStreamToIntList();
 
     }
@@ -50,7 +51,7 @@ public class IntStreamSample {
         return intStream.toArray();
     }
 
-    private void sumStringStream() {
+    private void sum_A_StringStream_By_reduce() {
         Optional<Integer> reduce = Stream.of("2", "3", "4")
                 .map(Integer::valueOf)
                 .reduce((partial, e) -> {
@@ -58,7 +59,16 @@ public class IntStreamSample {
                     return partial;
                 });
         //9
-        System.out.println("sumStringStream = " + reduce.get());
+        System.out.println("um_A_StringStream_By_reduce = " + reduce.get());
+    }
+
+    private void sum_A_StringStream_By_mapToInt() {
+        int sum = Stream.of("2", "3", "4")
+                .mapToInt(Integer::valueOf)
+                .sum();
+
+        //9
+        System.out.println("sum_A_StringStream_By_mapToInt = " + sum);
     }
 
     private void convertFromStringStreamToIntList() {
