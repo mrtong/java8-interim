@@ -26,6 +26,9 @@ public class IntStreamSample {
         sum_A_StringStream_By_mapToInt();
         convertFromStringStreamToIntList();
 
+        intStream = IntStream.of(1, 2, 3);
+        intStream2Stream(intStream);
+
     }
 
     private int getSum(IntStream intStream) {
@@ -43,8 +46,16 @@ public class IntStreamSample {
 
     private String intStreamToString(IntStream intStream) {
         //[1, 2, 3]
+        //mapToObj go back to Stream
         return intStream.mapToObj(String::valueOf).collect(Collectors.joining(", ", "[", "]"));
 
+    }
+
+    private void intStream2Stream(IntStream intStream){
+        Stream<Integer> boxed = intStream.boxed();
+        Optional<Integer> max = boxed.max(Integer::compareTo);
+
+        System.out.println("intStream2Stream = " + max.get());
     }
 
     private int[] intStreamToArray(IntStream intStream) {
