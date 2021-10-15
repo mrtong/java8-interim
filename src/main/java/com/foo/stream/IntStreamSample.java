@@ -1,5 +1,6 @@
 package com.foo.stream;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
@@ -21,6 +22,8 @@ public class IntStreamSample {
 
         intStream = IntStream.of(1, 2, 3);
         System.out.println("Convert int stream to an array. The result is " + intStreamToArray(intStream));
+
+        System.out.println("Convert an array to int stream. The result is " + this.array2IntStream());
 
         sum_A_StringStream_By_reduce();
         sum_A_StringStream_By_mapToInt();
@@ -51,7 +54,7 @@ public class IntStreamSample {
 
     }
 
-    private void intStream2Stream(IntStream intStream){
+    private void intStream2Stream(IntStream intStream) {
         Stream<Integer> boxed = intStream.boxed();
         Optional<Integer> max = boxed.max(Integer::compareTo);
 
@@ -60,6 +63,12 @@ public class IntStreamSample {
 
     private int[] intStreamToArray(IntStream intStream) {
         return intStream.toArray();
+    }
+
+    private IntStream array2IntStream() {
+        int[] array = {1, 2, 3};
+        IntStream stream = Arrays.stream(array);
+        return stream;
     }
 
     private void sum_A_StringStream_By_reduce() {
