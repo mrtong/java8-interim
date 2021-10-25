@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
 //In Java 8, we can use StreamSupport.stream to convert an Iterator into a Stream
@@ -36,6 +37,15 @@ public class Iterator2StreamSample {
                 .collect(Collectors.toList());
 
         result.forEach(x -> System.out.println(x));
+    }
+
+    private void iterator2IntStream(){
+        int[] array = {1, 3, 6};
+        Spliterator.OfInt spliterator = Arrays.spliterator(array);
+        IntStream ds = StreamSupport
+                .intStream(()->spliterator, Spliterator.ORDERED, false);
+        double sum = ds.sum();
+        System.out.println(sum);
     }
 
     private void iterable2Stream() {

@@ -55,6 +55,7 @@ public class IntStreamSample {
     }
 
     private void intStream2Stream(IntStream intStream) {
+        //intStream can be converted to Stream by the method boxed();
         Stream<Integer> boxed = intStream.boxed();
         Optional<Integer> max = boxed.max(Integer::compareTo);
 
@@ -83,6 +84,7 @@ public class IntStreamSample {
     }
 
     private void sum_A_StringStream_By_mapToInt() {
+        //mapToInt is used to convert a Stream to IntStream which provides more int related methods
         int sum = Stream.of("2", "3", "4")
                 .mapToInt(Integer::valueOf)
                 .sum();

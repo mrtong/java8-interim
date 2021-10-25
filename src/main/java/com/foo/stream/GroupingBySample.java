@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 /*
 ref:
 https://mkyong.com/java8/java-8-collectors-groupingby-and-mapping-example/
+so for groupingBy the 1st param is: what will be grouped
  */
 public class GroupingBySample {
     private List<Item> items = new ArrayList<>();
