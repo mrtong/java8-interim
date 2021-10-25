@@ -23,6 +23,10 @@ public class IntStreamSample {
         intStream = IntStream.of(1, 2, 3);
         System.out.println("Convert int stream to an array. The result is " + intStreamToArray(intStream));
 
+        intStream = IntStream.of(1, 2, 3);
+        System.out.println("Convert int stream to a List. The result is " + intStream2List(intStream));
+
+
         System.out.println("Convert an array to int stream. The result is " + this.array2IntStream());
 
         sum_A_StringStream_By_reduce();
@@ -53,6 +57,11 @@ public class IntStreamSample {
         return intStream.mapToObj(String::valueOf).collect(Collectors.joining(", ", "[", "]"));
 
     }
+
+    private List<Integer> intStream2List(IntStream intStream) {
+        return intStream.boxed().collect(Collectors.toList());
+    }
+
 
     private void intStream2Stream(IntStream intStream) {
         //intStream can be converted to Stream by the method boxed();
