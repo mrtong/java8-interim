@@ -29,6 +29,11 @@ public class Iterator2ListSample {
         list = iteratorToList4();
         System.out.println(list);
 
+        System.out.println("---------iteratorToList5--------------");
+        iterator = IntStream.of(1, 3, 2).iterator();
+        list = iteratorToList5(iterator);
+        System.out.println(list);
+
 
     }
 
@@ -53,6 +58,15 @@ public class Iterator2ListSample {
     private static List<Integer> iteratorToList4() {
         Spliterator.OfInt spliterator = IntStream.range(1, 4).spliterator();
         return StreamSupport.stream(spliterator, false).collect(Collectors.toList());
+    }
+
+    private static <T> List<T> iteratorToList5(Iterator<T> iterator) {
+        Iterable<T> iterable = () -> iterator;
+        List<T> mylist = new ArrayList<>();
+        for (T t : iterable)
+            mylist.add(t);
+        return mylist;
+
     }
 
 }
