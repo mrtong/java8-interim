@@ -166,6 +166,11 @@ public class GroupingBySample2 {
 
     }
 
+    /*
+    In this challenge, you have the Transaction class representing a transaction's information, including the transaction ID, customer ID, and transaction amount. The GroupByCustomerExample class includes the main method, where you can initialize the list of transactions and call the calculateCustomerSummaries method.
+
+    Your task is to implement the calculateCustomerSummaries method, which takes a list of transactions and returns a map where the keys are the customer IDs and the values are instances of the CustomerSummary class. The CustomerSummary class represents a summary of customer transactions, including the total amount and the number of transactions.
+     */
     public static Map<String, GroupingBySample2.CustomerSummary> calculateCustomerSummaries(List<GroupingBySample2.Transaction> transactions) {
         return transactions.stream()
                 .collect(Collectors.groupingBy(GroupingBySample2.Transaction::getCustomerId,
