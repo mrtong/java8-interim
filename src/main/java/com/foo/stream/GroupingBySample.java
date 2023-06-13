@@ -19,9 +19,13 @@ public class GroupingBySample {
     private List<Item> items = new ArrayList<>();
 
     private void simpleSample() {
+        Map<String, List<Item>> names = items.stream().collect(Collectors.groupingBy(Item::getName));
+        System.out.println(names);
+        //{papaya=[Item{name='papaya', qty=20, price=9.99}], banana=[Item{name='banana', qty=20, price=19.99}, Item{name='banana', qty=10, price=19.99}], apple=[Item{name='apple', qty=10, price=9.99}, Item{name='apple', qty=10, price=9.99}, Item{name='apple', qty=20, price=9.99}], orang=[Item{name='orang', qty=10, price=29.99}], watermelon=[Item{name='watermelon', qty=10, price=29.99}]}
         Map<Item, Long> collect = items.stream().collect(
                 Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(collect);
+        //{Item{name='apple', qty=10, price=9.99}=1, Item{name='watermelon', qty=10, price=29.99}=1, Item{name='apple', qty=20, price=9.99}=1, Item{name='banana', qty=10, price=19.99}=1, Item{name='papaya', qty=20, price=9.99}=1, Item{name='orang', qty=10, price=29.99}=1, Item{name='banana', qty=20, price=19.99}=1, Item{name='apple', qty=10, price=9.99}=1}
 
         Map<String, Long> counting = items.stream().collect(
                 Collectors.groupingBy(Item::getName, Collectors.counting()));
@@ -39,11 +43,18 @@ public class GroupingBySample {
         Map<BigDecimal, Set<String>> result =
                 items.stream().collect(
                         Collectors.groupingBy(Item::getPrice,
-                                Collectors.mapping(Item::getName, Collectors.toSet())
+                                Collectors.mapping(c -> c.getName(), Collectors.toSet())
                         )
                 );
         //{19.99=[banana], 29.99=[orang, watermelon], 9.99=[papaya, apple]}
         System.out.println(result);
+
+        Map<BigDecimal, List<Item>> collect1 = items.stream().collect(
+                Collectors.groupingBy(Item::getPrice
+                )
+        );
+        //{19.99=[Item{name='banana', qty=20, price=19.99}, Item{name='banana', qty=10, price=19.99}], 29.99=[Item{name='orang', qty=10, price=29.99}, Item{name='watermelon', qty=10, price=29.99}], 9.99=[Item{name='apple', qty=10, price=9.99}, Item{name='papaya', qty=20, price=9.99}, Item{name='apple', qty=10, price=9.99}, Item{name='apple', qty=20, price=9.99}]}
+        System.out.println(collect1);
 
         //same functionality
         HashMap<BigDecimal, Set<String>> collect = items.stream().collect(
@@ -74,6 +85,14 @@ public class GroupingBySample {
     }
 
     class Item {
+        @Override
+        public String toString() {
+            return "Item{" +
+                    "name='" + name + '\'' +
+                    ", qty=" + qty +
+                    ", price=" + price +
+                    '}';
+        }
 
         public Item(String name, int qty, BigDecimal price) {
             this.name = name;
