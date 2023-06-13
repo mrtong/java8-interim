@@ -57,12 +57,21 @@ public class GroupingBySample {
         System.out.println(collect1);
 
         //same functionality
+        //groupingBy(function, Supplier, downstream)
         HashMap<BigDecimal, Set<String>> collect = items.stream().collect(
                 Collectors.groupingBy(Item::getPrice,
                         HashMap::new, Collectors.mapping(Item::getName, Collectors.toSet()))
         );
         //{19.99=[banana], 29.99=[orang, watermelon], 9.99=[papaya, apple]}
         System.out.println(collect);
+
+        //same functionality
+        //groupingBy(function, downstream)
+        Map<BigDecimal, Set<String>> collect2 = items.stream().collect(
+                Collectors.groupingBy(Item::getPrice, Collectors.mapping(Item::getName, Collectors.toSet()))
+        );
+        //{19.99=[banana], 29.99=[orang, watermelon], 9.99=[papaya, apple]}
+        System.out.println(collect2);
     }
 
     public GroupingBySample() {
