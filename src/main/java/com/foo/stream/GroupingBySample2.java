@@ -115,7 +115,7 @@ public class GroupingBySample2 {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         List<String> words = List.of("apple", "banana", "cat", "dog", "elephant", "bbq");
         System.out.println("groupByFirstLetter(words)");
         groupByFirstLetter(words);
@@ -148,6 +148,9 @@ public class GroupingBySample2 {
 
         List<GroupingBySample2.Transaction> transactions = List.of(t1, t2, t3, t4, t5, t6, t7);
         System.out.println(calculateCustomerSummaries(transactions));
+
+        System.out.println("calculateCustomerSummaries2(List<Transaction> transactions)");
+        System.out.println(calculateCustomerSummaries2(transactions));
     }
 
     public static void groupByFirstLetter(List<String> words) {
@@ -171,12 +174,24 @@ public class GroupingBySample2 {
 
     Your task is to implement the calculateCustomerSummaries method, which takes a list of transactions and returns a map where the keys are the customer IDs and the values are instances of the CustomerSummary class. The CustomerSummary class represents a summary of customer transactions, including the total amount and the number of transactions.
      */
-    public static Map<String, GroupingBySample2.CustomerSummary> calculateCustomerSummaries(List<GroupingBySample2.Transaction> transactions) {
+    public static Map<String, CustomerSummary> calculateCustomerSummaries(List<Transaction> transactions) {
         return transactions.stream()
-                .collect(Collectors.groupingBy(GroupingBySample2.Transaction::getCustomerId,
+                .collect(Collectors.groupingBy(Transaction::getCustomerId,
                         Collectors.mapping(transaction -> new GroupingBySample2.CustomerSummary(transaction.getAmount(), 1),
                                 Collectors.reducing(new GroupingBySample2.CustomerSummary(0, 0),
                                         (summary1, summary2) -> new GroupingBySample2.CustomerSummary(summary1.getTotalAmount() + summary2.getTotalAmount(),
                                                 summary1.getNumTransactions() + summary2.getNumTransactions())))));
     }
+
+    public static Map<String, CustomerSummary> calculateCustomerSummaries2(List<Transaction> transactions) {
+        return transactions.stream()
+                .collect(Collectors.toMap(
+                        Transaction::getCustomerId,
+                        transaction -> new CustomerSummary(transaction.getAmount(), 1),
+                        (summary1, summary2) -> new CustomerSummary(
+                                summary1.getTotalAmount() + summary2.getTotalAmount(),
+                                summary1.getNumTransactions() + summary2.getNumTransactions())
+                ));
+    }
+
 }
