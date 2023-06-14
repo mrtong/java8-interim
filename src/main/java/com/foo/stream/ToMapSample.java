@@ -76,11 +76,14 @@ public class ToMapSample {
         userList.add(new User("3", "JJ"));
         userList.add(new User("5", "AA"));
         userList.add(new User("4", "KK"));
-        userList.add(new User("4", "KK1"));
+        userList.add(new User("4", "duplicate Key"));
 
         TreeMap<String, String> collect = userList.stream().collect(Collectors.toMap(User::getId, User::getName, (n1, n2) -> n1, TreeMap::new));
 //        {1=Luke, 2=Jake, 3=JJ, 4=KK, 5=AA}
         System.out.println(collect);
+        //this is interesting.
+        TreeMap<String, String> collect1 = userList.stream().collect(Collectors.toMap(User::getId, User::getName, (n1, n2) -> n2, TreeMap::new));
+        System.out.println(collect1);
 
     }
 }
