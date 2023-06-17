@@ -76,6 +76,7 @@ public class ToMapSample {
         userList.add(new User("3", "JJ"));
         userList.add(new User("5", "AA"));
         userList.add(new User("4", "KK"));
+        userList.add(new User("6", "KK"));
         userList.add(new User("4", "duplicate Key"));
 
         TreeMap<String, String> collect = userList.stream().collect(Collectors.toMap(User::getId, User::getName, (n1, n2) -> n1, TreeMap::new));
@@ -84,6 +85,9 @@ public class ToMapSample {
         //this is interesting.
         TreeMap<String, String> collect1 = userList.stream().collect(Collectors.toMap(User::getId, User::getName, (n1, n2) -> n2, TreeMap::new));
         System.out.println(collect1);
+        //this is the way to use value as the key. But be noted, if there is any duplcate in the value, then the later(n2) will be used
+        TreeMap<String, String> collect2 = userList.stream().collect(Collectors.toMap(User::getName, User::getId, (n1, n2) -> n2, TreeMap::new));
+        System.out.println("collect2 is " + collect2);
 
     }
 }
