@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * of type T and accumulator is a
  * function for combining two values
  */
-public class ReduceDemo {
+public class ReduceSample {
     public static void main(String... args) {
         List<Person> persons =
                 Arrays.asList(
