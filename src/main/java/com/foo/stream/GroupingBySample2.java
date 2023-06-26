@@ -128,25 +128,27 @@ public class GroupingBySample2 {
         System.out.println(collect1);
 
         System.out.println("calculateAverageSalariesByDepartment(List<Employee> employees)");
-        GroupingBySample2.Employee employee1 = new GroupingBySample2.Employee("a", "da", 100d);
-        GroupingBySample2.Employee employee2 = new GroupingBySample2.Employee("b", "da", 200d);
-        GroupingBySample2.Employee employee3 = new GroupingBySample2.Employee("c", "db", 108d);
-        GroupingBySample2.Employee employee4 = new GroupingBySample2.Employee("d", "db", 111d);
-        GroupingBySample2.Employee employee5 = new GroupingBySample2.Employee("e", "db", 178d);
+        Employee employee1 = new Employee("a", "da", 100d);
+        Employee employee2 = new Employee("b", "da", 200d);
+        Employee employee3 = new Employee("c", "db", 108d);
+        Employee employee4 = new Employee("d", "db", 111d);
+        Employee employee5 = new Employee("e", "db", 178d);
         //returns a map where the keys are the departments and the values are the average salaries of employees in each department.
-        List<GroupingBySample2.Employee> employees = List.of(employee1, employee2, employee3, employee4, employee5);
+        List<Employee> employees = List.of(employee1, employee2, employee3, employee4, employee5);
         System.out.println(calculateAverageSalariesByDepartment(employees));
+        System.out.println("This is to get the same result but using toMap approach");
+        System.out.println(calculateAverageSalariesByDepartment2(employees));
 
         System.out.println("calculateCustomerSummaries(List<Transaction> transactions)");
-        GroupingBySample2.Transaction t1 = new GroupingBySample2.Transaction("1", "1", 2.1);
-        GroupingBySample2.Transaction t2 = new GroupingBySample2.Transaction("2", "1", 2.4);
-        GroupingBySample2.Transaction t3 = new GroupingBySample2.Transaction("3", "1", 1.8);
-        GroupingBySample2.Transaction t4 = new GroupingBySample2.Transaction("4", "2", 1.3);
-        GroupingBySample2.Transaction t5 = new GroupingBySample2.Transaction("5", "2", 1.6);
-        GroupingBySample2.Transaction t6 = new GroupingBySample2.Transaction("6", "2", 2.3);
-        GroupingBySample2.Transaction t7 = new GroupingBySample2.Transaction("7", "2", 1.9);
+        Transaction t1 = new Transaction("1", "1", 2.1);
+        Transaction t2 = new Transaction("2", "1", 2.4);
+        Transaction t3 = new Transaction("3", "1", 1.8);
+        Transaction t4 = new Transaction("4", "2", 1.3);
+        Transaction t5 = new Transaction("5", "2", 1.6);
+        Transaction t6 = new Transaction("6", "2", 2.3);
+        Transaction t7 = new Transaction("7", "2", 1.9);
 
-        List<GroupingBySample2.Transaction> transactions = List.of(t1, t2, t3, t4, t5, t6, t7);
+        List<Transaction> transactions = List.of(t1, t2, t3, t4, t5, t6, t7);
         System.out.println(calculateCustomerSummaries(transactions));
 
         System.out.println("calculateCustomerSummaries2(List<Transaction> transactions)");
@@ -164,10 +166,35 @@ public class GroupingBySample2 {
     }
 
     //returns a map where the keys are the departments and the values are the average salaries of employees in each department.
-    public static Map<String, Double> calculateAverageSalariesByDepartment(List<GroupingBySample2.Employee> employees) {
-        return employees.stream().collect(Collectors.groupingBy(GroupingBySample2.Employee::getDepartment, Collectors.averagingDouble(GroupingBySample2.Employee::getSalary)));
+    //this is a groupingBy approach
+    public static Map<String, Double> calculateAverageSalariesByDepartment(List<Employee> employees) {
+        return employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
 
     }
+
+    //returns a map where the keys are the departments and the values are the average salaries of employees in each department.
+    //this is a toMap approach
+    public static Map<String, Double> calculateAverageSalariesByDepartment2(List<Employee> employees) {
+        Map<String, Double> sumByDepartment = employees.stream()
+                .collect(Collectors.toMap(
+                        Employee::getDepartment,
+                        Employee::getSalary,
+                        Double::sum
+                ));
+
+        Map<String, Long> countByDepartment = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,
+                        Collectors.counting()
+                ));
+
+        return sumByDepartment.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue() / countByDepartment.get(entry.getKey())
+                ));
+    }
+
 
     /*
     In this challenge, you have the Transaction class representing a transaction's information, including the transaction ID, customer ID, and transaction amount. The GroupByCustomerExample class includes the main method, where you can initialize the list of transactions and call the calculateCustomerSummaries method.
@@ -177,12 +204,13 @@ public class GroupingBySample2 {
     public static Map<String, CustomerSummary> calculateCustomerSummaries(List<Transaction> transactions) {
         return transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getCustomerId,
-                        Collectors.mapping(transaction -> new GroupingBySample2.CustomerSummary(transaction.getAmount(), 1),
-                                Collectors.reducing(new GroupingBySample2.CustomerSummary(0, 0),
-                                        (summary1, summary2) -> new GroupingBySample2.CustomerSummary(summary1.getTotalAmount() + summary2.getTotalAmount(),
+                        Collectors.mapping(transaction -> new CustomerSummary(transaction.getAmount(), 1),
+                                Collectors.reducing(new CustomerSummary(0, 0),
+                                        (summary1, summary2) -> new CustomerSummary(summary1.getTotalAmount() + summary2.getTotalAmount(),
                                                 summary1.getNumTransactions() + summary2.getNumTransactions())))));
     }
 
+    //this is a toMap approach
     public static Map<String, CustomerSummary> calculateCustomerSummaries2(List<Transaction> transactions) {
         return transactions.stream()
                 .collect(Collectors.toMap(
