@@ -1,5 +1,6 @@
 package com.foo.stream;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -115,6 +116,35 @@ public class GroupingBySample2 {
         }
     }
 
+    static class Product {
+        private String name;
+        private String category;
+        private double price;
+
+        public Product(String name, String category, double price) {
+            this.name = name;
+            this.category = category;
+            this.price = price;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
     public static void main(String[] args) {
         List<String> words = List.of("apple", "banana", "cat", "dog", "elephant", "bbq");
         System.out.println("groupByFirstLetter(words)");
@@ -153,6 +183,26 @@ public class GroupingBySample2 {
 
         System.out.println("calculateCustomerSummaries2(List<Transaction> transactions)");
         System.out.println(calculateCustomerSummaries2(transactions));
+
+        List<Product> products = Arrays.asList(
+                new Product("iPhone", "Electronics", 1000.0),
+                new Product("Laptop", "Electronics", 1500.0),
+                new Product("Shirt", "Clothing", 50.0),
+                new Product("Pants", "Clothing", 70.0),
+                new Product("Watch", "Accessories", 200.0)
+        );
+
+        System.out.println("groupProductsByCategoryAndPriceRange(final List<Product> products)");
+        Map<String, Map<String, List<Product>>> collect = groupProductsByCategoryAndPriceRange(products);
+        collect.forEach((category, rangeMap) -> {
+            System.out.println("category is " + category);
+            rangeMap.forEach((range, product) -> {
+                System.out.println("range is " + range);
+                System.out.println("product is " + product);
+            });
+
+        });
+
     }
 
     public static void groupByFirstLetter(List<String> words) {
@@ -220,6 +270,21 @@ public class GroupingBySample2 {
                                 summary1.getTotalAmount() + summary2.getTotalAmount(),
                                 summary1.getNumTransactions() + summary2.getNumTransactions())
                 ));
+    }
+
+    //The goal is to group the products by their category and price range. You need to define the price ranges and decide how to group the products accordingly.
+    public static Map<String, Map<String, List<Product>>> groupProductsByCategoryAndPriceRange(final List<Product> products) {
+        return products.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.groupingBy(c -> {
+            if (c.getPrice() > 0 && c.getPrice() < 100) {
+                return "rannge 1";
+            } else if (c.getPrice() >= 100 && c.getPrice() < 1000) {
+                return "rannge 2";
+            } else if (c.getPrice() > 1000) {
+                return "rannge 3";
+            } else {
+                return "rannge 0";
+            }
+        })));
     }
 
 }
