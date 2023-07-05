@@ -5,6 +5,11 @@ import java.util.Comparator;
 import java.util.Spliterator;
 
 public class ArraysOpsSample {
+    /*
+    we can do binary search in an Array
+    we can splite an array
+    we can sort an array
+     */
     static class Person {
         private String name;
         private int age;

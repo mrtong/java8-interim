@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WrapperPrimitiveConverter {
+    /*
+    we can convert wrapper to primitive and vice versa
+    we can convert an Integer List to array and vice versa
+     */
     public static void main(String[] args) {
         wrapper2primitive();
         primitive2wrapper();
