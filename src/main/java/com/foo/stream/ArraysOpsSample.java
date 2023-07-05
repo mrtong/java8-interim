@@ -1,13 +1,15 @@
 package com.foo.stream;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Spliterator;
 
 public class ArraysOpsSample {
     /*
     we can do binary search in an Array
-    we can splite an array
+    we can split an array
     we can sort an array
      */
     static class Person {
@@ -35,9 +37,17 @@ public class ArraysOpsSample {
 
     public static void main(String[] args) {
         int[] numbers = {5, 2, 8, 1, 9};
+        int[] originalNumbers = Arrays.copyOf(numbers, numbers.length);
+
         System.out.println("The original array was :" + Arrays.toString(numbers));
         sortArrays(numbers);
         System.out.println("After sort the array has become to :" + Arrays.toString(numbers));
+        //put it back
+        numbers = Arrays.copyOf(originalNumbers, numbers.length);
+        System.out.println("after put back it is " + Arrays.toString(numbers));
+
+        reverseSortArrays(numbers);
+        numbers = Arrays.copyOf(originalNumbers, numbers.length);
         //binary search
         searchIntArrays(numbers, 2);
         convertToString(numbers);
@@ -49,6 +59,20 @@ public class ArraysOpsSample {
     private static void sortArrays(int[] numbers) {
         //the sort methods within Arrays does change the original array
         Arrays.sort(numbers);
+    }
+
+    private static void reverseSortArrays(int[] numbers) {
+        //the sort methods within Arrays does change the original array
+
+        Arrays.sort(numbers);
+        Integer[] newNumbers = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
+        List<Integer> integerList = Arrays.asList(newNumbers);
+        Collections.reverse(integerList);
+
+        //Since the array is backed by the list, the reverse operation affects the original array.
+        System.out.println("After reverse sort the array has become to :" + Arrays.toString(newNumbers));
+        System.out.println("However the numbers array is still the same " + Arrays.toString(numbers));
+        //the reason is Collections.reverse(integerList); integerList is from newNumbers not from numbers
     }
 
     private static void searchIntArrays(int[] numbers, int key) {

@@ -2,7 +2,6 @@ package com.foo.stream;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WrapperPrimitiveConverter {
     /*
@@ -60,7 +59,7 @@ public class WrapperPrimitiveConverter {
         System.out.println("start of integerArray2List()");
         Integer[] integers = new Integer[7];
         Arrays.setAll(integers, index -> index * 2);
-        List<Integer> integerList = Arrays.stream(integers).collect(Collectors.toList());
+        List<Integer> integerList = Arrays.asList(integers);
         integerList.stream().forEach(c -> System.out.println(c));
         System.out.println("Complete of integerList2array()");
     }
