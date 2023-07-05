@@ -76,9 +76,10 @@ public class ArraysOpsSample {
     }
 
     private static void searchIntArrays(int[] numbers, int key) {
+        //need to be sorted 1st
+        Arrays.sort(numbers);
         int i = Arrays.binarySearch(numbers, key);
         System.out.println(" Key=" + key + " was found in array, the index was " + i);
-        //how to do a binary seach of Object?
     }
 
     private static void convertToString(int[] numbers) {
