@@ -6,6 +6,15 @@ import java.util.Comparator;
 import java.util.List;
 
 public class CollectionsOpsSamples {
+    /*
+     we can reverse a List
+     we can sort a List
+     we can reverseSort a List
+     we can find Min Max of a List
+     we can swap numbers of a List
+     we can find frequency of an element within a List
+     we can do binary search of a sorted List
+     */
     public static void main(String[] args) {
         List<Integer> numbers = new ArrayList<>();
         numbers.add(5);
