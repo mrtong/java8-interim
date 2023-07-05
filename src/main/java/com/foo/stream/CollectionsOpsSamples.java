@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class CollectionsOpsSamples {
     /*
@@ -70,10 +71,25 @@ public class CollectionsOpsSamples {
     }
 
     private static void findMinMax2(List<Integer> numbers) {
-        Integer integerMax = numbers.stream().max(Comparator.comparingInt(Integer::intValue)).get();
-        Integer integerMin = numbers.stream().min(Comparator.naturalOrder()).get();
-        System.out.println("The max of this List<Integer> is " + integerMax);
-        System.out.println("The min of this List<Integer> is " + integerMin);
+        //although we can use Comparator.naturalOrder() here, I think `Integer::compareTo` is better
+        //the reason is I know the type of the List is Integer.
+        //Integer::compareTo: This is a method reference to the compareTo method of the Integer class.
+        // It explicitly specifies the comparison logic using the method reference.
+        //Comparator.naturalOrder(): This uses a built-in comparator provided by the Comparator interface.
+        // It represents the natural ordering of elements based on their natural order defined by the Comparable interface.
+        Optional<Integer> integerMax = numbers.stream().max(Integer::compareTo);
+        if (integerMax.isPresent()) {
+            System.out.println("The max of this List<Integer> is " + integerMax.get());
+        } else {
+            System.out.println("Im surpriced we cant find the max element within the List.");
+        }
+        Optional<Integer> integerMin = numbers.stream().min(Integer::compareTo);
+        if (integerMin.isPresent()) {
+
+            System.out.println("The min of this List<Integer> is " + integerMin.get());
+        } else {
+            System.out.println("Im surpriced we cant find the min element within the List.");
+        }
     }
 
     private static void swapNumbers(List<Integer> numbers) {
