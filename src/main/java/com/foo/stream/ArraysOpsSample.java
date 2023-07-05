@@ -11,6 +11,8 @@ public class ArraysOpsSample {
     we can do binary search in an Array
     we can split an array
     we can sort an array
+    we can reverse-sort an array
+    we can use splitor to split an array
      */
     static class Person {
         private String name;

@@ -35,7 +35,8 @@ public class CollectionsOpsSamples {
         Collections.copy(numbers, originalNumbers);
 
         findMinMax(numbers);
-        Collections.copy(numbers, originalNumbers);
+
+        findMinMax2(numbers);
 
         swapNumbers(numbers);
         findFrequencyOfANumber();
@@ -66,6 +67,13 @@ public class CollectionsOpsSamples {
     private static void findMinMax(List<Integer> numbers) {
         System.out.println("The min of this collection is " + Collections.min(numbers));
         System.out.println("The max of this collection is " + Collections.max(numbers));
+    }
+
+    private static void findMinMax2(List<Integer> numbers) {
+        Integer integerMax = numbers.stream().max(Comparator.comparingInt(Integer::intValue)).get();
+        Integer integerMin = numbers.stream().min(Comparator.naturalOrder()).get();
+        System.out.println("The max of this List<Integer> is " + integerMax);
+        System.out.println("The min of this List<Integer> is " + integerMin);
     }
 
     private static void swapNumbers(List<Integer> numbers) {
