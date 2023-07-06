@@ -1,9 +1,11 @@
 package com.foo.stream;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 //based on https://www.jianshu.com/p/b2d78544df64
@@ -12,6 +14,7 @@ public class ToMapSample {
         list2Map();
         list2MapWithMergefunc();
         list2mapWithMergefuncAndSorted();
+        addTwoMaps();
     }
 
     static class User {
@@ -89,5 +92,19 @@ public class ToMapSample {
         TreeMap<String, String> collect2 = userList.stream().collect(Collectors.toMap(User::getName, User::getId, (n1, n2) -> n2, TreeMap::new));
         System.out.println("collect2 is " + collect2);
 
+    }
+
+    private static void addTwoMaps() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5,6);
+        Supplier<Map<Integer, Integer>> mapSupplier = () -> list.stream().collect(Collectors.toMap(x -> x, y -> y * y));
+
+        Map<Integer, Integer> mapValueAdd = list.stream().collect(Collectors.toMap(x -> x, y -> y, (v1, v2) -> v1 + v2, mapSupplier));
+        Map<Integer, Integer> mapValueAdd1 = list.stream().collect(Collectors.toMap(x -> x, y -> y));
+        Map<Integer, Integer> mapValueAdd2 = list.stream().collect(Collectors.toMap(x -> x, y -> y, (v1, v2) -> v1 + v2));
+        //mapValueAdd{1=2, 2=6, 3=12, 4=20, 5=30, 6=42}
+        //this is a 等差数列 2/1=2 6/2=3 12/3=4 20/4=5 30/5=6 42/6=7
+        System.out.println("mapValueAdd" + mapValueAdd);
+        System.out.println("mapValueAdd1" + mapValueAdd1);
+        System.out.println("mapValueAdd2" + mapValueAdd2);
     }
 }
