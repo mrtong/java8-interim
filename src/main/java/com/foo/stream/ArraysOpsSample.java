@@ -100,7 +100,8 @@ public class ArraysOpsSample {
         //If you do not provide a sorted array to the binarySearch() method, the result is unpredictable.
         Arrays.sort(people, Comparator.comparingInt(Person::getAge));
         int searchAge = 30;
-        int index = Arrays.binarySearch(people, new Person("", searchAge), Comparator.comparing(Person::getAge));
+        //this one is search by age. Even though in the below sample person's name is 'aaa', it does not affect the search result
+        int index = Arrays.binarySearch(people, new Person("aaaa", searchAge), Comparator.comparing(Person::getAge));
         if (index >= 0) {
             System.out.println("Person found at index: " + index);
             System.out.println(people[index]);

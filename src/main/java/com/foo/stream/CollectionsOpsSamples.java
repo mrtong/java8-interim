@@ -1,6 +1,7 @@
 package com.foo.stream;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -44,6 +45,8 @@ public class CollectionsOpsSamples {
 
         Collections.copy(numbers, originalNumbers);
         binarySearch(numbers);
+        //search object
+        binarySearch();
     }
 
     private static void reverseIntegerList(List<Integer> numbers) {
@@ -118,4 +121,47 @@ public class CollectionsOpsSamples {
         System.out.println("8 was found in the List in " + i);
     }
 
+    static class Person {
+        private String name;
+        private int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        @Override
+        public String toString() {
+            return "Person [name=" + name + ", age=" + age + "]";
+        }
+    }
+
+    private static void binarySearch() {
+        Person[] people = {
+                new Person("John", 25),
+                new Person("Alice", 30),
+                new Person("Bob", 20),
+                new Person("Luke", 30),
+                new Person("Jane", 35)
+        };
+        List<Person> personList = Arrays.asList(people);
+        Collections.sort(personList, Comparator.comparing(Person::getAge));
+        int searchAge = 30;
+        System.out.println("start of binarySearch By Person");
+        int index = Collections.binarySearch(personList, new Person("", searchAge), Comparator.comparing(Person::getAge));
+        if (index >= 0) {
+            System.out.println("Person found at index: " + index);
+            System.out.println(personList.get(index));
+        } else {
+            System.out.println("Person not found.");
+        }
+    }
 }
