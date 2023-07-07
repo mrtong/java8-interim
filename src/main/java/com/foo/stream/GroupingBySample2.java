@@ -218,6 +218,7 @@ public class GroupingBySample2 {
     //returns a map where the keys are the departments and the values are the average salaries of employees in each department.
     //this is a groupingBy approach
     public static Map<String, Double> calculateAverageSalariesByDepartment(List<Employee> employees) {
+        //{da=150.0, db=132.33333333333334}
         return employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
 
     }

@@ -6,7 +6,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/*
+we can compare by natureOrder
+we can compare by reverse order
+we can compare by wrapper class/primitive
+we can compare by Customized Comparator
+we can compare by multiple criteria
+ */
 public class SortedSample {
     static class Employee {
         private String name;
@@ -86,7 +92,7 @@ public class SortedSample {
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(5, 2, 8, 1, 9, 3, 6);
 
-        // Sorting in natural order
+        // Sorting in natural order in a number List
         List<Integer> sortedNumbers = numbers.stream().sorted().collect(Collectors.toList());
         System.out.println("Sorted numbers: " + sortedNumbers);
         List<Integer> reverseSortedNumbers1 = numbers.stream().sorted((a, b) -> b.compareTo(a)).collect(Collectors.toList());
@@ -99,7 +105,7 @@ public class SortedSample {
         employees.add(new Employee("Alice", 32));
         employees.add(new Employee("Bob", 28));
         employees.add(new Employee("Emily", 21));
-
+        //sort in Object List
         List<Employee> collect = employees.stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
         System.out.println("Sorted By Age" + collect);
         List<Employee> collect1 = employees.stream().sorted(Comparator.comparing(Employee::getAge).reversed()).collect(Collectors.toList());
@@ -136,7 +142,7 @@ public class SortedSample {
         products.add(new Product("Strawberry", 1.99, 20));
         products.add(new Product("Pineapple", 3.49, 15));
 
-        List<Product> collect6 = products.stream().sorted(Comparator.comparing(Product::getName).thenComparing(Comparator.comparingDouble(Product::getPrice).thenComparing(Product::getQuantity))).collect(Collectors.toList());
+        List<Product> collect6 = products.stream().sorted(Comparator.nullsFirst(Comparator.comparing(Product::getName).thenComparing(Comparator.comparingDouble(Product::getPrice).thenComparing(Product::getQuantity)))).collect(Collectors.toList());
         System.out.println("Multiple sorting criteria" + collect6);
 
         List<Product> collect7 = products.stream().sorted(new CustomProductComparator()).collect(Collectors.toList());
