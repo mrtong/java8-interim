@@ -9,10 +9,11 @@ import java.util.Spliterator;
 public class ArraysOpsSample {
     /*
     we can do binary search in an Array
-    we can split an array
+    we can split an array via splitor
     we can sort an array
     we can reverse-sort an array
     we can use splitor to split an array
+    we can find frequency
      */
     static class Person {
         private String name;
@@ -56,6 +57,11 @@ public class ArraysOpsSample {
         searchObjectarrays();
         useSpliterator();
         useSpliterator2();
+
+        int[] numbers1 = {1, 2, 3, 4, 2, 3, 2, 1, 2};
+        int targetNumber = 2;
+        findFrequency(numbers1, targetNumber);
+        findFrequency2(numbers1, targetNumber);
     }
 
     private static void sortArrays(int[] numbers) {
@@ -151,5 +157,19 @@ public class ArraysOpsSample {
             System.out.println(a);
         })) ;
 
+    }
+
+    public static void findFrequency(int[] numbers, int targetNumber) {
+
+        long count = Arrays.stream(numbers).filter(e -> e == targetNumber).count();
+        System.out.println(targetNumber + " appeared " + count + " times. in findFrequency() aproach.");
+    }
+
+    public static void findFrequency2(int[] numbers, int targetNumber) {
+        Integer[] integers = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
+
+        List<Integer> ints = Arrays.asList(integers);
+        int frequency = Collections.frequency(ints, targetNumber);
+        System.out.println(targetNumber + " appeared " + frequency + " times. in findFrequency2() aproach.");
     }
 }
