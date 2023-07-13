@@ -59,6 +59,8 @@ public class WrapperPrimitiveConverter {
         System.out.println("start of integerArray2List()");
         Integer[] integers = new Integer[7];
         Arrays.setAll(integers, index -> index * 2);
+        //please be noted ONLY integerList is allowed in Arrays.asList
+        //Arrays.asList(<int array>) will return a List<int[]>;
         List<Integer> integerList = Arrays.asList(integers);
         integerList.stream().forEach(c -> System.out.println(c));
         System.out.println("Complete of integerList2array()");
